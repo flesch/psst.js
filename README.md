@@ -20,5 +20,5 @@ pubsub.unsubscribe handle
 ### Publish
 
 ```coffeescript
-pubsub.publish "/channel/topic", ["a", "b", "c"]
+pubsub.publish "/channel/topic", "a", "b", "c"
 ```

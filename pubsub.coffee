@@ -20,9 +20,9 @@
           subscriptions[subscription.channel].splice(i, 1) if callback is subscription.callback
       return
 
-    publish: (channel, args) ->
+    publish: (channel) ->
       if is_subscribed channel
-        callback.apply this, args for i, callback of subscriptions[channel]
+        callback.apply this, Array::slice.call(arguments, 1) for i, callback of subscriptions[channel]
       return
 
 ) this, (if typeof module isnt "undefined" and module.exports then module.exports else this)
