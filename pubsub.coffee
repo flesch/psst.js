@@ -1,11 +1,15 @@
-((global, exports) ->
+((name, definition) ->
+  return define definition if typeof define is "function"
+  return module.exports = definition() unless typeof module is "undefined"
+  this[name] = definition()
+) "pubsub", ->
 
   subscriptions = {}
 
   is_subscribed = (channel) ->
     Object::hasOwnProperty.call subscriptions, channel
 
-  pubsub = exports.pubsub =
+  {
 
     subscribe: (channel, callback) ->
       if callback instanceof Function
@@ -25,4 +29,4 @@
         callback.apply this, Array::slice.call(arguments, 1) for i, callback of subscriptions[channel]
       return
 
-) this, (if typeof module isnt "undefined" and module.exports then module.exports else this)
+  }
