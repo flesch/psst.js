@@ -1,13 +1,11 @@
-var pubsub = {
+var subscriptions = {}, pubsub = {
   
-  subscriptions: {},
-
   on: function(channel, callback){
-    if (callback instanceof Function) {
-      if (!Object.prototype.hasOwnProperty.call(this.subscriptions, channel)) {
-        this.subscriptions[channel] = [];
+    if (Object.prototype.toString.call(callback) === '[object Function]') {
+      if (!Object.prototype.hasOwnProperty.call(subscriptions, channel)) {
+        subscriptions[channel] = [];
       }
-      this.subscriptions[channel].push(callback);
+      subscriptions[channel].push(callback);
       return {
         channel: channel,
         callback: callback
@@ -24,16 +22,20 @@ var pubsub = {
   },
   
   off: function(subscription){
-    for (var i = 0, len = this.subscriptions[subscription.channel].length; i < len; i++) {
-      if (this.subscriptions[subscription.channel][i] === subscription.callback) {
-        this.subscriptions[subscription.channel].splice(i, 1);
+    if (Object.prototype.hasOwnProperty.call(subscription, 'channel')) {
+      for (var i = 0, len = subscriptions[subscription.channel].length; i < len; i++) {
+        if (subscriptions[subscription.channel][i] === subscription.callback) {
+          subscriptions[subscription.channel].splice(i, 1);
+        }
       }
     }
   },
   
-  emit: function(channel){   
-    for (var i = 0, len = this.subscriptions[channel].length; i < len; i++) {
-      this.subscriptions[channel][i].apply(this, Array.prototype.slice.call(arguments, 1));
+  emit: function(channel){
+    if (Object.prototype.hasOwnProperty.call(subscriptions, channel)) {
+      for (var i = 0, len = subscriptions[channel].length; i < len; i++) {
+        subscriptions[channel][i].apply(this, Array.prototype.slice.call(arguments, 1));
+      }
     }
   }
   
