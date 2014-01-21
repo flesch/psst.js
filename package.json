@@ -1,6 +1,6 @@
 {
   "name": "psst",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small Pub/Sub library that uses subscriptions rather than callbacks.",
   "main": "index.js",
   "scripts": {
