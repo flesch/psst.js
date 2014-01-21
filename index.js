@@ -43,6 +43,6 @@ var subscriptions = {}, pubsub = {
 
 pubsub.subscribe = pubsub.on;
 pubsub.unsubscribe = pubsub.off;
-pubsub.publish = pubsub.emit;
+pubsub.publish pubsub.trigger = pubsub.emit;
 
 module.exports = pubsub;
