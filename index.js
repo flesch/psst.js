@@ -1,4 +1,4 @@
-var subscriptions = {}, pubsub = {
+var subscriptions = {}, psst = {
   
   on: function(channel, callback){
     if (channel && Object.prototype.toString.call(callback) === '[object Function]') {
@@ -41,8 +41,8 @@ var subscriptions = {}, pubsub = {
   
 };
 
-pubsub.subscribe = pubsub.on;
-pubsub.unsubscribe = pubsub.off;
-pubsub.publish pubsub.trigger = pubsub.emit;
+psst.subscribe = psst.on;
+psst.unsubscribe = psst.off;
+psst.publish psst.trigger = psst.emit;
 
-module.exports = pubsub;
+module.exports = psst;
