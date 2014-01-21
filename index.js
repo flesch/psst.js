@@ -43,6 +43,6 @@ var subscriptions = {}, psst = {
 
 psst.subscribe = psst.on;
 psst.unsubscribe = psst.off;
-psst.publish psst.trigger = psst.emit;
+psst.publish = psst.trigger = psst.emit;
 
 module.exports = psst;
