@@ -2,13 +2,9 @@ var pubsub = {
   
   subscriptions: {},
 
-  is_subscribed: function(channel){
-    return Object.prototype.hasOwnProperty.call(this.subscriptions, channel);
-  },
-
   on: function(channel, callback){
     if (callback instanceof Function) {
-      if (!this.is_subscribed(channel)) {
+      if (!Object.prototype.hasOwnProperty.call(this.subscriptions, channel)) {
         this.subscriptions[channel] = [];
       }
       this.subscriptions[channel].push(callback);
