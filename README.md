@@ -5,21 +5,36 @@ This is yet another small **Pub/Sub** library, however unlike many other impleme
 
 ## Installing
 
-```
+```bash
 $ npm install psst
 ```
 
-```
+```javascript
 var psst = require('psst');
 ```
+or
 
-**psst** can be used in the browser with [browserify](http://browserify.org/).
+```html
+<script src="https://rawgit.com/flesch/psst.js/master/index.js"></script>
+```
 
 ## Using
 
+**psst.js** supports both a single global listener (`psst.on`), or many independent listeners (`new psst()`).
+
+```javascript
+var listener = new psst();
+```
+
 ### Subscribe/On
 
+```javascript
+var subscription = listener.on('topic', function(msg){
+  console.log(msg);
+});
 ```
+
+```javascript
 var subscription = psst.on('topic', function(msg){
   console.log(msg);
 });
@@ -30,7 +45,13 @@ var subscription = psst.on('topic', function(msg){
 
 ### Subscribe Once
 
+```javascript
+var subscription = listener.once('topic', function(msg){
+  console.log(msg);
+});
 ```
+
+```javascript
 var subscription = psst.once('topic', function(msg){
   console.log(msg);
 });
@@ -40,15 +61,20 @@ This `subscription` is removed from the subscriber's list after the callback has
 
 ### Unsubscribe/Off
 
+```javascript
+listener.off(subscription);
 ```
+```javascript
 psst.off(subscription);
 ```
 
-This method requires the subscription created in the `.on` method. Unlike other libraries, you'll remove the subscription from the subscriber list, instead of removing a callback from a topic.
-
 ### Publish/Emit
 
+```javascript
+listener.emit('topic', 'Hello World!');
 ```
+
+```javascript
 psst.emit('topic', 'Hello World!');
 ```
 
